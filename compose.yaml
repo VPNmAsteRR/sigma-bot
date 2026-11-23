@@ -1,0 +1,21 @@
+services:
+  sigma-bot:
+    build: .
+    container_name: sigma-bot
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+      TZ: Europe/Moscow
+    volumes:
+      - sigma-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+volumes:
+  sigma-data:
